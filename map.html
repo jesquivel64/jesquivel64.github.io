@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+		var map;
+		var points = [
+			{ name: "CRAED Tegucigalpa", position: { lng: -87.1659565, lat: 14.0876303 }, url: "http://www.google.com/"},
+			{ name: "CRAED Choluteca", position: { lng: -87.1751404, lat: 13.3241486 }, url: "" },
+			{ name: "CRAED La Entrada", position: { lng: -88.7349651, lat: 15.0697704 }, url: "" },
+			{ name: "CRAED Tocoa", position: { lng: -85.99684789999998, lat: 15.6576354 }, url: ""},
+			{ name: "CRAED Siguateque", position: { lng: -87.8402405, lat: 14.596386600000002 }, url: ""},
+			{ name: "CRAED El Progreso", position: { lng: -87.80584019999998, lat: 15.384341499999998 }, url: ""},
+			{ name: "CRAED Juticalpa", position: { lng: -86.21076719999996, lat: 14.657210800000001 }, url: ""},
+			{ name: "CRAED El Paraíso", position: { lng: -86.41873079999999, lat: 14.073693200000001 }, url: ""}
+		];
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: 14.58358, lng: -87.07763 },
+          zoom: 8,
+		  scrollwheel:  false
+        });
+		for(var i = 0; i < points.length; i++)
+		{
+			var place = points[i];
+			var marker = new google.maps.Marker({
+				map: map,
+				title: place.name,
+				position: place.position,
+				url: place.url
+			});
+			google.maps.event.addListener(marker, 'click', function() {
+				window.location.href = this.url;
+			});
+		}
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+  </body>
+</html>
